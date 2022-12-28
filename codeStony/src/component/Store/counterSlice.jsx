@@ -11,16 +11,6 @@ function decerement(state) {
   state.value -= 1;
 }
 
-function setValue0(state) {
-  state.value = 0;
-}
-function setValue1(state) {
-  state.value = 1;
-}
-function setValue2(state) {
-  state.value = 2;
-}
-
 export const counterSlice = createSlice({
   name: "Ali",
   initialState,
@@ -28,18 +18,10 @@ export const counterSlice = createSlice({
   reducers: {
     incerement,
     decerement,
-    setValue0,
-    setValue1,
-    setValue2,
   },
 });
 
-export const {
-  incerement: incerementAction,
-  decerement: decerementAction,
-  setValue0: setValue0Action,
-  setValue1: setValue1Action,
-  setValue2: setValue2Action,
-} = counterSlice.actions;
+export const { incerement: incerementAction, decerement: decerementAction } =
+  counterSlice.actions;
 
 export default counterSlice.reducer;

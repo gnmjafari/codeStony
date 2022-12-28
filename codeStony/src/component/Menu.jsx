@@ -36,7 +36,11 @@ function Menu() {
             >
               {pages.map((page, index) => {
                 return (
-                  <Tab sx={{ fontFamily: "Byekan" }} key={index} label={page} />
+                  <Tab
+                    sx={{ fontFamily: "Byekan", fontSize: "17px" }}
+                    key={index}
+                    label={page}
+                  />
                 );
               })}
             </Tabs>

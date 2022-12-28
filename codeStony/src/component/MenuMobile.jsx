@@ -20,7 +20,7 @@ function MenuMobile() {
 
   return (
     <>
-      <Typography variant="h6" sx={{ marginRight: "auto" }}>
+      <Typography variant="h5" sx={{ marginRight: "auto" }}>
         Code Stony
       </Typography>
       <Drawer
@@ -29,7 +29,7 @@ function MenuMobile() {
         anchor={"right"}
       >
         <Box sx={{ width: "300px", textAlign: "right" }}>
-          <List sx={{ height: "97vh" }}>
+          <List sx={{ height: "100vh" }}>
             {pages.map((page, index) => {
               return (
                 <ListItemButton key={index} sx={{ justifyContent: "flex-end" }}>
@@ -38,6 +38,7 @@ function MenuMobile() {
                       disableTypography={true}
                       sx={{ fontFamily: "Byekan", fontSize: "22px" }}
                       primary={page}
+                      onClick={() => setOpenMenu(false)}
                     ></ListItemText>
                   </ListItemIcon>
                 </ListItemButton>
@@ -59,7 +60,7 @@ function MenuMobile() {
         </Box>
       </Drawer>
       <IconButton
-        sx={{ marginRight: "auto" }}
+        sx={{ marginRight: "auto", color: "white" }}
         onClick={() => setOpenMenu(!openMenu)}
       >
         <MenuIcon sx={{ fontSize: "35px" }} />
