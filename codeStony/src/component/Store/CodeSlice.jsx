@@ -9,6 +9,11 @@ const codeSlice = createSlice({
     addCode: (state, action) => {
       state.infoCode.push(action.payload);
     },
+    RemoveCode: (state, action) => {
+      state.infoCode = state.infoCode.filter(
+        (item) => item.id !== action.payload.id
+      );
+    },
   },
 });
 

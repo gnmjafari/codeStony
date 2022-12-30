@@ -8,6 +8,8 @@ import {
   InputLabel,
   Input,
   InputAdornment,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
@@ -19,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 function ListCodeSave() {
   const dispatch = useDispatch();
   const listCode = useSelector((state) => state.code.infoCode);
+  const { RemoveCode } = codeSlice.actions;
 
   return (
     <>
@@ -95,7 +98,11 @@ function ListCodeSave() {
                 <Button sx={{ width: "100%" }} variant="contained">
                   Edit
                 </Button>
-                <Button sx={{ width: "100%" }} variant="contained">
+                <Button
+                  onClick={() => dispatch(RemoveCode({ id: item.id }))}
+                  sx={{ width: "100%" }}
+                  variant="contained"
+                >
                   Remove
                 </Button>
               </FormControl>
