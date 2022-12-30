@@ -1,8 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {};
-
-export const CodeSlice = createSlice({
-  name: "Code",
-  initialState,
+const codeSlice = createSlice({
+  name: "code",
+  initialState: {
+    infoCode: [],
+  },
+  reducers: {
+    addCode: (state, action) => {
+      state.infoCode.push(action.payload);
+    },
+  },
 });
+
+export default codeSlice;
