@@ -5,6 +5,7 @@ import BoxCode from "./component/BoxCode";
 import { Provider } from "react-redux";
 import store from "./component/Store/store";
 import "./App.css";
+import ListCodeSave from "./component/ListCodeSave";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <div dir="rtl">
         <Menu />
         <BoxCode />
+        <ListCodeSave />
       </div>
     </Provider>
   );

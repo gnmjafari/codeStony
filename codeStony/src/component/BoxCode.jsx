@@ -160,36 +160,35 @@ function BoxCode() {
           rows={20}
         />
       </FormControl>
-      <Stack spacing={2}>
-        <Button
-          onClick={handleAddCode}
-          sx={{
-            fontFamily: "Byekan",
-            fontSize: "25px",
-            display: "flex",
-            gap: "15px",
-          }}
-          startIcon={<AssignmentTurnedInIcon />}
-          variant="contained"
-          type="submit"
-        >
-          {" "}
-          ذخیره اطلاعات{" "}
-        </Button>
-        <Snackbar
-          open={showSuccess}
-          autoHideDuration={6000}
+
+      <Button
+        onClick={handleAddCode}
+        sx={{
+          fontFamily: "Byekan",
+          fontSize: "25px",
+          display: "flex",
+          gap: "15px",
+        }}
+        startIcon={<AssignmentTurnedInIcon />}
+        variant="contained"
+        type="submit"
+      >
+        {" "}
+        ذخیره اطلاعات{" "}
+      </Button>
+      <Snackbar
+        open={showSuccess}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert
           onClose={handleClose}
+          severity="success"
+          sx={{ width: "100%", display: "flex", gap: "10px" }}
         >
-          <Alert
-            onClose={handleClose}
-            severity="success"
-            sx={{ width: "100%", display: "flex", gap: "10px" }}
-          >
-            با موفقیت اضافه گردید
-          </Alert>
-        </Snackbar>
-      </Stack>
+          با موفقیت اضافه گردید
+        </Alert>
+      </Snackbar>
     </Box>
   );
 }
