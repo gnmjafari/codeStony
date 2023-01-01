@@ -14,6 +14,23 @@ const codeSlice = createSlice({
         (item) => item.id !== action.payload.id
       );
     },
+    ShowEdit: (state, action) => {
+      state.infoCode.map((item) => {
+        if (item.id === action.payload.id) {
+          item.edit = action.payload.edit;
+        }
+      });
+    },
+    EditCode: (state, action) => {
+      state.infoCode.map((item) => {
+        if (item.id === action.payload.id) {
+          item.edit = action.payload.edit;
+          item.addTitel = action.payload.addTitel;
+          item.addCodeSave = action.payload.addCodeSave;
+          item.addTextSave = action.payload.addTextSave;
+        }
+      });
+    },
   },
 });
 
