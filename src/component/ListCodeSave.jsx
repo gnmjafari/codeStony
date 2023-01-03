@@ -25,6 +25,7 @@ function ListCodeSave() {
   const [newAddTitel, setNewAddTitel] = useState("");
   const [newAddCodeSave, setNewAddCodeSave] = useState("");
   const [newAddTextSave, setNewAddTextSave] = useState("");
+  console.log(listCode.length);
 
   const handleEdit = (ss) => {
     dispatch(
@@ -52,7 +53,7 @@ function ListCodeSave() {
           justifyContent: "center",
           backgroundImage: "linear-gradient(#FB9886, #FC5B58)",
           color: "#fff",
-          width: "300px",
+          width: "400px",
           margin: "auto",
           marginBottom: "50px",
           marginTop: "200px",
@@ -61,7 +62,7 @@ function ListCodeSave() {
         }}
       >
         <SpeakerNotesIcon />
-        All Codes
+        {listCode.length == 0 ? "There is no code" : "All Codes"}
       </Typography>
       <Stack
         direction="column"
