@@ -10,7 +10,7 @@ import ListCodeSave from "./component/ListCodeSave";
 function App() {
   return (
     <Provider store={store}>
-      <div dir="rtl">
+      <div dir="rtl" style={{ backgroundColor: "#282A31" }}>
         <Menu />
         <BoxCode />
         <ListCodeSave />

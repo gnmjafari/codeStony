@@ -46,13 +46,18 @@ function ListCodeSave() {
       <Typography
         variant="h4"
         sx={{
-          textAlign: "center",
-          marginBottom: "50px",
-          marginTop: "200px",
           display: "flex",
           alignItems: "center",
           gap: "15px",
           justifyContent: "center",
+          backgroundImage: "linear-gradient(#FB9886, #FC5B58)",
+          color: "#fff",
+          width: "300px",
+          margin: "auto",
+          marginBottom: "50px",
+          marginTop: "200px",
+          borderRadius: "20px",
+          padding: "5px",
         }}
       >
         <SpeakerNotesIcon />
@@ -97,6 +102,7 @@ function ListCodeSave() {
                     sx={{
                       fontFamily: "Byekan",
                       fontSize: "22px",
+                      color: "#fff",
                     }}
                     htmlFor=""
                   >
@@ -105,7 +111,12 @@ function ListCodeSave() {
                   <Input
                     onChange={(e) => setNewAddTitel(e.target.value)}
                     value={newAddTitel}
-                    sx={{ fontFamily: "Byekan", fontSize: "20px" }}
+                    sx={{
+                      fontFamily: "Byekan",
+                      fontSize: "20px",
+                      backgroundColor: "#fff",
+                      borderRadius: "10px",
+                    }}
                     multiline
                     maxRows={4}
                     startAdornment={
@@ -116,7 +127,11 @@ function ListCodeSave() {
                   />
                   <Button
                     onClick={() => handleEdit(item.id)}
-                    sx={{ width: "100%" }}
+                    sx={{
+                      width: "100%",
+                      color: "#282A31",
+                      backgroundColor: "#40A4FC",
+                    }}
                     variant="contained"
                   >
                     Save
@@ -124,7 +139,11 @@ function ListCodeSave() {
                   <Button
                     disabled
                     onClick={() => dispatch(RemoveCode({ id: item.id }))}
-                    sx={{ width: "100%" }}
+                    sx={{
+                      width: "100%",
+                      color: "#282A31",
+                      backgroundColor: "#40A4FC",
+                    }}
                     variant="contained"
                   >
                     Remove
@@ -140,6 +159,7 @@ function ListCodeSave() {
                     direction: "rtl",
                     boxShadow:
                       " rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;",
+                    backgroundColor: "#fff",
                   }}
                 >
                   <InputLabel
@@ -159,6 +179,7 @@ function ListCodeSave() {
                       fontFamily: "Byekan",
                       fontSize: "20px",
                       textAlign: "left",
+                      color: "black",
                     }}
                     multiline
                     rows={10}
@@ -174,6 +195,7 @@ function ListCodeSave() {
                     direction: "ltr",
                     boxShadow:
                       " rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;",
+                    backgroundColor: "#fff",
                   }}
                 >
                   <InputLabel
@@ -226,20 +248,15 @@ function ListCodeSave() {
                   gap: "70px",
                 }}
               >
-                <InputLabel
-                  color="info"
-                  sx={{
-                    fontFamily: "Byekan",
-                    fontSize: "22px",
-                  }}
-                  htmlFor=""
-                >
-                  عنوان جزوه
-                </InputLabel>
                 <Input
                   disabled
                   value={item.addTitel}
-                  sx={{ fontFamily: "Byekan", fontSize: "20px" }}
+                  sx={{
+                    fontFamily: "Byekan",
+                    fontSize: "20px",
+                    backgroundColor: "#F8CE46",
+                    borderRadius: "10px",
+                  }}
                   multiline
                   maxRows={4}
                   startAdornment={
@@ -252,14 +269,22 @@ function ListCodeSave() {
                   onClick={() =>
                     dispatch(ShowEdit({ id: item.id, edit: true }))
                   }
-                  sx={{ width: "100%" }}
+                  sx={{
+                    width: "100%",
+                    backgroundImage: "linear-gradient(#FB9886, #FC5B58)",
+                    color: "#fff",
+                  }}
                   variant="contained"
                 >
                   Edit
                 </Button>
                 <Button
                   onClick={() => dispatch(RemoveCode({ id: item.id }))}
-                  sx={{ width: "100%" }}
+                  sx={{
+                    width: "100%",
+                    backgroundImage: "linear-gradient(#FB9886, #FC5B58)",
+                    color: "#fff",
+                  }}
                   variant="contained"
                 >
                   Remove
@@ -275,18 +300,9 @@ function ListCodeSave() {
                   direction: "rtl",
                   boxShadow:
                     " rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;",
+                  backgroundColor: "#F8CE46",
                 }}
               >
-                <InputLabel
-                  color="info"
-                  sx={{
-                    fontFamily: "Byekan",
-                    fontSize: "30px",
-                  }}
-                  htmlFor=""
-                >
-                  متن جزوه
-                </InputLabel>
                 <Input
                   disabled
                   value={item.addTextSave}
@@ -294,6 +310,7 @@ function ListCodeSave() {
                     fontFamily: "Byekan",
                     fontSize: "20px",
                     textAlign: "left",
+                    color: "#fff",
                   }}
                   multiline
                   rows={10}
@@ -309,18 +326,9 @@ function ListCodeSave() {
                   direction: "ltr",
                   boxShadow:
                     " rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;",
+                  backgroundColor: "#F8CE46",
                 }}
               >
-                <InputLabel
-                  color="info"
-                  sx={{
-                    fontFamily: "Byekan",
-                    fontSize: "30px",
-                  }}
-                  htmlFor=""
-                >
-                  کد جزوه
-                </InputLabel>
                 <Input
                   disabled
                   value={item.addCodeSave}

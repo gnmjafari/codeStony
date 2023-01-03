@@ -20,7 +20,10 @@ function MenuMobile() {
 
   return (
     <>
-      <Typography variant="h5" sx={{ marginRight: "auto" }}>
+      <Typography
+        variant="h5"
+        sx={{ marginRight: "auto", color: "#F8CE46", fontWeight: "700" }}
+      >
         Code Stony
       </Typography>
       <Drawer
@@ -29,14 +32,18 @@ function MenuMobile() {
         anchor={"right"}
       >
         <Box sx={{ width: "300px", textAlign: "right" }}>
-          <List sx={{ height: "100vh" }}>
+          <List sx={{ height: "100vh", backgroundColor: "#282A31" }}>
             {pages.map((page, index) => {
               return (
                 <ListItemButton key={index} sx={{ justifyContent: "flex-end" }}>
                   <ListItemIcon>
                     <ListItemText
                       disableTypography={true}
-                      sx={{ fontFamily: "Byekan", fontSize: "22px" }}
+                      sx={{
+                        fontFamily: "Byekan",
+                        fontSize: "22px",
+                        color: "#F8CE46",
+                      }}
                       primary={page}
                       onClick={() => setOpenMenu(false)}
                     ></ListItemText>
@@ -45,14 +52,17 @@ function MenuMobile() {
               );
             })}
             <Button
-              color="success"
               sx={{
                 width: "100%",
                 position: "absolute",
                 bottom: "0",
                 left: "0",
+                backgroundColor: "#F8CE46",
+                color: "#282A31",
+                ":hover": {
+                  backgroundColor: "#F8CE46",
+                },
               }}
-              variant="contained"
             >
               Login / SingUp
             </Button>

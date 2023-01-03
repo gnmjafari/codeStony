@@ -8,10 +8,13 @@ import {
   Snackbar,
   Alert,
   Stack,
+  Typography,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import NotesIcon from "@mui/icons-material/Notes";
+import EventNoteIcon from "@mui/icons-material/EventNote";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import codeSlice from "./Store/CodeSlice";
@@ -55,8 +58,9 @@ function BoxCode() {
 
   return (
     <Box
-      mt={15}
       sx={{
+        marginTop: "60px",
+        paddingTop: "70px",
         width: "90%",
         marginRight: "auto",
         marginLeft: "auto",
@@ -64,31 +68,48 @@ function BoxCode() {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        gap: "50px",
+        gap: "70px",
       }}
     >
-      <FormControl variant="outlined" sx={{ width: "50%" }}>
-        <InputLabel
-          color="info"
+      <FormControl sx={{ width: "50%" }}>
+        <Typography
+          variant="h4"
           sx={{
             fontFamily: "Byekan",
-            fontSize: "22px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+            backgroundColor: "#F8CE46",
+            padding: "10px",
+            borderRadius: "20px",
+            color: "#282A31",
+            width: "40%",
+            margin: "auto",
+            marginBottom: "20px",
+            boxShadow:
+              "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
           }}
-          htmlFor=""
         >
+          <NotesIcon />
           عنوان جزوه
-        </InputLabel>
+        </Typography>
         <Input
+          disableUnderline="false"
           value={addTitel}
           onChange={(e) => setAddTitel(e.target.value)}
-          sx={{ fontFamily: "Byekan", fontSize: "20px" }}
+          sx={{
+            fontFamily: "Byekan",
+            fontSize: "20px",
+            backgroundColor: "#fff",
+            borderRadius: "20px",
+            color: "#282A31",
+            padding: "5px 10px",
+            boxShadow:
+              "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px",
+          }}
           multiline
           maxRows={4}
-          startAdornment={
-            <InputAdornment position="start">
-              <AssignmentIcon />
-            </InputAdornment>
-          }
         />
       </FormControl>
 
@@ -96,30 +117,46 @@ function BoxCode() {
         variant="filled"
         sx={{
           width: "90%",
-          borderRadius: "20px",
-          padding: "20px",
+          padding: "10px",
           direction: "ltr",
-          boxShadow:
-            " rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;",
         }}
       >
-        <InputLabel
-          color="info"
+        <Typography
+          variant="h4"
           sx={{
             fontFamily: "Byekan",
-            fontSize: "30px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+            backgroundColor: "#F8CE46",
+            padding: "10px",
+            borderRadius: "20px",
+            color: "#282A31",
+            width: "30%",
+            margin: "auto",
+            marginBottom: "20px",
+            boxShadow:
+              "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
           }}
-          htmlFor=""
         >
-          کد جزوه
-        </InputLabel>
+          متن کد
+          <EventNoteIcon />
+        </Typography>
         <Input
+          disableUnderline="false"
           value={addCodeSave}
           onChange={(e) => setAddCodeSave(e.target.value)}
           sx={{
             fontFamily: "Byekan",
             fontSize: "20px",
             textAlign: "left",
+            backgroundColor: "#fff",
+            borderRadius: "20px",
+            boxShadow:
+              " rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;",
+            padding: "10px",
+            color: "#282A31",
           }}
           multiline
           rows={20}
@@ -130,24 +167,32 @@ function BoxCode() {
         variant="filled"
         sx={{
           width: "90%",
-          borderRadius: "20px",
-          padding: "20px",
           direction: "rtl",
-          boxShadow:
-            " rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;",
           marginTop: "50px",
         }}
       >
-        <InputLabel
-          color="info"
+        <Typography
+          variant="h4"
           sx={{
             fontFamily: "Byekan",
-            fontSize: "30px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "10px",
+            backgroundColor: "#F8CE46",
+            padding: "10px",
+            borderRadius: "20px",
+            color: "#282A31",
+            width: "30%",
+            margin: "auto",
+            marginBottom: "20px",
+            boxShadow:
+              "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
           }}
-          htmlFor=""
         >
+          <EventNoteIcon />
           متن جزوه
-        </InputLabel>
+        </Typography>
         <Input
           value={addTextSave}
           onChange={(e) => setAddTextSave(e.target.value)}
@@ -155,6 +200,12 @@ function BoxCode() {
             fontFamily: "Byekan",
             fontSize: "20px",
             textAlign: "left",
+            backgroundColor: "#fff",
+            borderRadius: "20px",
+            boxShadow:
+              " rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;",
+            padding: "10px",
+            color: "#282A31",
           }}
           multiline
           rows={20}
@@ -168,6 +219,11 @@ function BoxCode() {
           fontSize: "25px",
           display: "flex",
           gap: "15px",
+          color: "#282A31",
+          backgroundColor: "#F8CE46",
+          ":hover": {
+            backgroundColor: "#F8CE46",
+          },
         }}
         startIcon={<AssignmentTurnedInIcon />}
         variant="contained"
