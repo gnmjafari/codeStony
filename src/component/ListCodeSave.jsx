@@ -25,7 +25,6 @@ function ListCodeSave() {
   const [newAddTitel, setNewAddTitel] = useState("");
   const [newAddCodeSave, setNewAddCodeSave] = useState("");
   const [newAddTextSave, setNewAddTextSave] = useState("");
-  console.log(listCode.length);
 
   const handleEdit = (ss) => {
     dispatch(
