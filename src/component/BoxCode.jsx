@@ -95,7 +95,7 @@ function BoxCode() {
           عنوان جزوه
         </Typography>
         <Input
-          disableUnderline="false"
+          // disableUnderline="false"
           value={addTitel}
           onChange={(e) => setAddTitel(e.target.value)}
           sx={{
@@ -144,7 +144,6 @@ function BoxCode() {
           <EventNoteIcon />
         </Typography>
         <Input
-          disableUnderline="false"
           value={addCodeSave}
           onChange={(e) => setAddCodeSave(e.target.value)}
           sx={{

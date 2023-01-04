@@ -111,7 +111,7 @@ function Menu() {
             <Button
               onClick={() => {
                 Navigate("/Singuplogin");
-                dispatch(setValue(""));
+                dispatch(setValue("صفحه اصلی"));
               }}
               startIcon={<LoginIcon />}
               variant="none"
