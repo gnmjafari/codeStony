@@ -10,18 +10,24 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { useState } from "react";
 import MenuMobile from "./MenuMobile";
 import LoginIcon from "@mui/icons-material/Login";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import codeSlice from "./Store/CodeSlice";
 
 function Menu() {
-  const pages = ["صفحه اصلی", "داشبورد", "ارتباط با ما", "درباره پروژه"];
-  const [value, setValue] = useState(0);
+  const pages = ["صفحه اصلی", "داشبورد", "ارتباط با ما", "َدرباره پروژه"];
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  const Navigate = useNavigate();
+  const dispatch = useDispatch();
+  const count = useSelector((state) => state.code.value);
+  const { setValue } = codeSlice.actions;
+  console.log(count);
 
   return (
-    <AppBar sx={{ backgroundColor: "#F8CE46", color: "#fff" }}>
+    <AppBar dir="rtl" sx={{ backgroundColor: "#F8CE46", color: "#fff" }}>
       <Toolbar>
         {isMatch ? (
           <MenuMobile />
@@ -35,28 +41,79 @@ function Menu() {
             </Typography>
             <Tabs
               textColor="inherit"
-              value={value}
+              value={count}
               sx={{
                 color: "#282A31",
                 "& .MuiTabs-indicator": {
                   backgroundColor: "#282A31",
                 },
               }}
-              onChange={(e, newValue) => setValue(newValue)}
             >
               {pages.map((page, index) => {
-                return (
-                  <Tab
-                    sx={{ fontFamily: "Byekan", fontSize: "18px" }}
-                    key={index}
-                    label={page}
-                  />
-                );
+                if (page == "صفحه اصلی") {
+                  return (
+                    <Tab
+                      value="صفحه اصلی"
+                      onClick={() => {
+                        Navigate("/Home");
+                        dispatch(setValue("صفحه اصلی"));
+                      }}
+                      sx={{ fontFamily: "Byekan", fontSize: "18px" }}
+                      key={index}
+                      label={page}
+                    />
+                  );
+                }
+                if (page == "داشبورد") {
+                  return (
+                    <Tab
+                      value="داشبورد"
+                      onClick={() => {
+                        Navigate("/Dashboard");
+                        dispatch(setValue("داشبورد"));
+                      }}
+                      sx={{ fontFamily: "Byekan", fontSize: "18px" }}
+                      key={index}
+                      label={page}
+                    />
+                  );
+                }
+                if (page == "ارتباط با ما") {
+                  return (
+                    <Tab
+                      value="ارتباط با ما"
+                      onClick={() => {
+                        Navigate("/ContactUs");
+                        dispatch(setValue("ارتباط با ما"));
+                      }}
+                      sx={{ fontFamily: "Byekan", fontSize: "18px" }}
+                      key={index}
+                      label={page}
+                    />
+                  );
+                }
+                if (page == "َدرباره پروژه") {
+                  return (
+                    <Tab
+                      value="َدرباره پروژه"
+                      onClick={() => {
+                        Navigate("/About");
+                        dispatch(setValue("َدرباره پروژه"));
+                      }}
+                      sx={{ fontFamily: "Byekan", fontSize: "18px" }}
+                      key={index}
+                      label={page}
+                    />
+                  );
+                }
               })}
             </Tabs>
             <Button
+              onClick={() => {
+                Navigate("/Singuplogin");
+                dispatch(setValue(""));
+              }}
               startIcon={<LoginIcon />}
-              href="#"
               variant="none"
               sx={{
                 gap: "10px",

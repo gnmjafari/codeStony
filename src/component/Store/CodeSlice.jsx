@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const codeSlice = createSlice({
   name: "code",
   initialState: {
+    value: "صفحه اصلی",
     infoCode: [],
   },
   reducers: {
@@ -30,6 +31,9 @@ const codeSlice = createSlice({
           item.addTextSave = action.payload.addTextSave;
         }
       });
+    },
+    setValue: (state, action) => {
+      state.value = action.payload;
     },
   },
 });

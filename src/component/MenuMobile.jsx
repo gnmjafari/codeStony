@@ -12,9 +12,11 @@ import React from "react";
 import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
 function MenuMobile() {
   const pages = ["صفحه اصلی", "داشبورد", "ارتباط با ما", "درباره پروژه"];
+  const Navigate = useNavigate();
 
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -22,7 +24,7 @@ function MenuMobile() {
     <>
       <Typography
         variant="h5"
-        sx={{ marginRight: "auto", color: "#F8CE46", fontWeight: "700" }}
+        sx={{ marginRight: "auto", color: "#fff", fontWeight: "700" }}
       >
         Code Stony
       </Typography>
@@ -34,24 +36,107 @@ function MenuMobile() {
         <Box sx={{ width: "300px", textAlign: "right" }}>
           <List sx={{ height: "100vh", backgroundColor: "#282A31" }}>
             {pages.map((page, index) => {
-              return (
-                <ListItemButton key={index} sx={{ justifyContent: "flex-end" }}>
-                  <ListItemIcon>
-                    <ListItemText
-                      disableTypography={true}
-                      sx={{
-                        fontFamily: "Byekan",
-                        fontSize: "22px",
-                        color: "#F8CE46",
-                      }}
-                      primary={page}
-                      onClick={() => setOpenMenu(false)}
-                    ></ListItemText>
-                  </ListItemIcon>
-                </ListItemButton>
-              );
+              if (page == "صفحه اصلی") {
+                return (
+                  <ListItemButton
+                    onClick={() => {
+                      Navigate("/Home");
+                    }}
+                    key={index}
+                    sx={{ justifyContent: "flex-end" }}
+                  >
+                    <ListItemIcon>
+                      <ListItemText
+                        disableTypography={true}
+                        sx={{
+                          fontFamily: "Byekan",
+                          fontSize: "22px",
+                          color: "#F8CE46",
+                        }}
+                        primary={page}
+                        onClick={() => setOpenMenu(false)}
+                      ></ListItemText>
+                    </ListItemIcon>
+                  </ListItemButton>
+                );
+              }
+              if (page == "داشبورد") {
+                return (
+                  <ListItemButton
+                    onClick={() => {
+                      Navigate("/Dashboard");
+                    }}
+                    key={index}
+                    sx={{ justifyContent: "flex-end" }}
+                  >
+                    <ListItemIcon>
+                      <ListItemText
+                        disableTypography={true}
+                        sx={{
+                          fontFamily: "Byekan",
+                          fontSize: "22px",
+                          color: "#F8CE46",
+                        }}
+                        primary={page}
+                        onClick={() => setOpenMenu(false)}
+                      ></ListItemText>
+                    </ListItemIcon>
+                  </ListItemButton>
+                );
+              }
+              if (page == "ارتباط با ما") {
+                return (
+                  <ListItemButton
+                    onClick={() => {
+                      Navigate("/ContactUs");
+                    }}
+                    key={index}
+                    sx={{ justifyContent: "flex-end" }}
+                  >
+                    <ListItemIcon>
+                      <ListItemText
+                        disableTypography={true}
+                        sx={{
+                          fontFamily: "Byekan",
+                          fontSize: "22px",
+                          color: "#F8CE46",
+                        }}
+                        primary={page}
+                        onClick={() => setOpenMenu(false)}
+                      ></ListItemText>
+                    </ListItemIcon>
+                  </ListItemButton>
+                );
+              }
+              if (page == "درباره پروژه") {
+                return (
+                  <ListItemButton
+                    onClick={() => {
+                      Navigate("/About");
+                    }}
+                    key={index}
+                    sx={{ justifyContent: "flex-end" }}
+                  >
+                    <ListItemIcon>
+                      <ListItemText
+                        disableTypography={true}
+                        sx={{
+                          fontFamily: "Byekan",
+                          fontSize: "22px",
+                          color: "#F8CE46",
+                        }}
+                        primary={page}
+                        onClick={() => setOpenMenu(false)}
+                      ></ListItemText>
+                    </ListItemIcon>
+                  </ListItemButton>
+                );
+              }
             })}
             <Button
+              onClick={() => {
+                Navigate("/Singuplogin");
+              }}
               sx={{
                 width: "100%",
                 position: "absolute",
