@@ -1,6 +1,7 @@
 import React from "react";
 import {
   AppBar,
+  Box,
   Button,
   IconButton,
   Tab,
@@ -15,6 +16,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import codeSlice from "./Store/CodeSlice";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
 
 function Menu() {
   const pages = ["صفحه اصلی", "داشبورد", "ارتباط با ما", "َدرباره پروژه"];
@@ -108,25 +110,45 @@ function Menu() {
                 }
               })}
             </Tabs>
-            <Button
-              onClick={() => {
-                Navigate("/Singuplogin");
-                dispatch(setValue("صفحه اصلی"));
-              }}
-              startIcon={<LoginIcon />}
-              variant="none"
-              sx={{
-                gap: "10px",
-                marginRight: "auto",
-                backgroundColor: "#282A31",
-                color: "#fff",
-                ":hover": {
+            <Box sx={{ marginRight: "auto" }}>
+              <Button
+                onClick={() => {
+                  Navigate("/RegisterForm");
+                  dispatch(setValue("صفحه اصلی"));
+                }}
+                startIcon={<HowToRegIcon />}
+                variant="none"
+                sx={{
+                  gap: "10px",
                   backgroundColor: "#282A31",
-                },
-              }}
-            >
-              Login / SingUp
-            </Button>
+                  color: "#fff",
+                  ":hover": {
+                    backgroundColor: "#282A31",
+                  },
+                }}
+              >
+                Register
+              </Button>
+              <Button
+                onClick={() => {
+                  Navigate("/LoginForm");
+                  dispatch(setValue("صفحه اصلی"));
+                }}
+                startIcon={<LoginIcon />}
+                variant="none"
+                sx={{
+                  gap: "10px",
+                  marginRight: "15px",
+                  backgroundColor: "#282A31",
+                  color: "#fff",
+                  ":hover": {
+                    backgroundColor: "#282A31",
+                  },
+                }}
+              >
+                Login
+              </Button>
+            </Box>
           </>
         )}
       </Toolbar>

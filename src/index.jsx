@@ -6,9 +6,11 @@ import Dashboard from "./component/Dashboard";
 import { Provider } from "react-redux";
 import store from "./component/Store/store";
 import ContactUs from "./component/ContactUs";
-import Singuplogin from "./component/Singuplogin";
+import RegisterForm from "./component/RegisterForm";
 import Menu from "./component/Menu";
-import App from "./App";
+import "./index.css";
+import Home from "./component/Home";
+import LoginForm from "./component/LoginForm";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -16,12 +18,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <BrowserRouter>
         <Menu />
         <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/Home" element={<App />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/Home" element={<Home />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/About" element={<About />} />
           <Route path="/ContactUs" element={<ContactUs />} />
-          <Route path="/Singuplogin" element={<Singuplogin />} />
+          <Route path="/RegisterForm" element={<RegisterForm />} />
+          <Route path="/LoginForm" element={<LoginForm />} />
         </Routes>
       </BrowserRouter>
     </Provider>

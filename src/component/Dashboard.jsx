@@ -1,13 +1,13 @@
-import { Typography } from "@mui/material";
 import React from "react";
+import BoxCode from "./BoxCode";
+import ListCodeSave from "./ListCodeSave";
 
 function Dashboard() {
   return (
-    <>
-      <Typography variant="h4" sx={{ margin: "100px" }}>
-        Coming Soon ... Dashboard
-      </Typography>
-    </>
+    <div dir="rtl" style={{ backgroundColor: "#282A31" }}>
+      <BoxCode />
+      <ListCodeSave />
+    </div>
   );
 }
 

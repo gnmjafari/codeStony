@@ -1,14 +1,14 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
 
-function Singuplogin() {
+function RegisterForm() {
   return (
     <>
       <Typography variant="h4" sx={{ margin: "100px" }}>
-        Coming Soon ... Singup and Login
+        Coming Soon ... Register
       </Typography>
     </>
   );
 }
 
-export default Singuplogin;
+export default RegisterForm;
