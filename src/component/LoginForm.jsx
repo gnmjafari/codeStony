@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
+import codeSlice from "./Store/CodeSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function LoginForm() {
+  const [loginUsername, setLoginUsername] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const dispatch = useDispatch();
+  const { loginUser } = codeSlice.actions;
+
+  function handleLogin() {
+    dispatch(loginUser({ username: loginUsername, password: loginPassword }));
+    setLoginUsername("");
+    setLoginPassword("");
+  }
+
   return (
     <Box
       style={{
@@ -46,13 +59,20 @@ function LoginForm() {
           }}
         >
           <TextField
+            onChange={(e) => setLoginUsername(e.target.value)}
             sx={{ width: "100%" }}
-            label="Username Or Email"
+            label="Username"
             type="username"
           />
-          <TextField sx={{ width: "100%" }} label="Password" type="password" />
+          <TextField
+            onChange={(e) => setLoginPassword(e.target.value)}
+            sx={{ width: "100%" }}
+            label="Password"
+            type="password"
+          />
         </Box>
         <Button
+          onClick={() => handleLogin()}
           variant="none"
           sx={{
             gap: "20px",
