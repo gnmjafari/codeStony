@@ -16,6 +16,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import codeSlice from "./Store/CodeSlice";
+import MenuValue from "./Store/MenuValue";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 
 function Menu() {
@@ -24,8 +25,8 @@ function Menu() {
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const Navigate = useNavigate();
   const dispatch = useDispatch();
-  const count = useSelector((state) => state.code.value);
-  const { setValue } = codeSlice.actions;
+  const count = useSelector((state) => state.MenuValue.value);
+  const { setValue } = MenuValue.actions;
   console.log(count);
 
   return (
