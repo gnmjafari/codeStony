@@ -2,17 +2,27 @@ import React, { useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import codeSlice from "./Store/CodeSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [Userlogin, setUserLogin] = useState(true);
   const dispatch = useDispatch();
   const { loginUser } = codeSlice.actions;
+  const Navigate = useNavigate();
 
   function handleLogin() {
-    dispatch(loginUser({ username: loginUsername, password: loginPassword }));
+    dispatch(
+      loginUser({
+        username: loginUsername,
+        password: loginPassword,
+        login: Userlogin,
+      })
+    );
     setLoginUsername("");
     setLoginPassword("");
+    Navigate("/Dashboard");
   }
 
   return (

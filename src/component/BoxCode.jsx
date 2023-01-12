@@ -59,7 +59,7 @@ function BoxCode() {
   return (
     <Box
       sx={{
-        marginTop: "60px",
+        marginTop: "40px",
         paddingTop: "70px",
         width: "90%",
         marginRight: "auto",

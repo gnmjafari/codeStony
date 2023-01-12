@@ -20,6 +20,7 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatpassword] = useState("");
   const [edit, setEdit] = useState(false);
+  const [login, setLogin] = useState(false);
 
   console.log(user);
 
@@ -35,12 +36,14 @@ function RegisterForm() {
     ) {
       dispatch(
         addUser({
+          idUser: user.length === 0 ? 1 : user[user.length - 1].idUser + 1,
           name,
           family,
           username,
           email,
           password,
           edit,
+          login,
         })
       );
       setname("");
