@@ -54,6 +54,9 @@ const codeSlice = createSlice({
         }
       });
     },
+    logOut: (state, action) => {
+      state.userLogin = action.payload;
+    },
   },
 });
 

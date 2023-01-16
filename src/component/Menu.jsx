@@ -26,7 +26,9 @@ function Menu() {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
   const count = useSelector((state) => state.MenuValue.value);
+  const userLogin = useSelector((state) => state.code.userLogin);
   const { setValue } = MenuValue.actions;
+  const { logOut } = codeSlice.actions;
   console.log(count);
 
   return (
@@ -111,7 +113,71 @@ function Menu() {
                 }
               })}
             </Tabs>
-            <Box sx={{ marginRight: "auto" }}>
+            {userLogin.length == 0 ? (
+              <>
+                <Box sx={{ marginRight: "auto" }}>
+                  <Button
+                    onClick={() => {
+                      Navigate("/RegisterForm");
+                      dispatch(setValue("داشبورد"));
+                    }}
+                    startIcon={<HowToRegIcon />}
+                    variant="none"
+                    sx={{
+                      gap: "10px",
+                      backgroundColor: "#282A31",
+                      color: "#fff",
+                      ":hover": {
+                        backgroundColor: "#282A31",
+                      },
+                    }}
+                  >
+                    Register
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      Navigate("/LoginForm");
+                      dispatch(setValue("داشبورد"));
+                    }}
+                    startIcon={<LoginIcon />}
+                    variant="none"
+                    sx={{
+                      gap: "10px",
+                      marginRight: "15px",
+                      backgroundColor: "#282A31",
+                      color: "#fff",
+                      ":hover": {
+                        backgroundColor: "#282A31",
+                      },
+                    }}
+                  >
+                    Login
+                  </Button>
+                </Box>
+              </>
+            ) : (
+              <>
+                <Button
+                  onClick={() => {
+                    dispatch(logOut([]));
+                  }}
+                  startIcon={<HowToRegIcon />}
+                  variant="none"
+                  sx={{
+                    gap: "10px",
+                    backgroundColor: "#282A31",
+                    marginRight: "auto",
+                    color: "#fff",
+                    ":hover": {
+                      backgroundColor: "#282A31",
+                    },
+                  }}
+                >
+                  logOut
+                </Button>
+              </>
+            )}
+            {/* <Box sx={{ marginRight: "auto" }}>
               <Button
                 onClick={() => {
                   Navigate("/RegisterForm");
@@ -149,7 +215,7 @@ function Menu() {
               >
                 Login
               </Button>
-            </Box>
+            </Box> */}
           </>
         )}
       </Toolbar>

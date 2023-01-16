@@ -13,6 +13,8 @@ import { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import HowToRegIcon from "@mui/icons-material/HowToReg";
+import LoginIcon from "@mui/icons-material/Login";
 
 function MenuMobile() {
   const pages = ["صفحه اصلی", "داشبورد", "ارتباط با ما", "درباره پروژه"];
@@ -133,24 +135,59 @@ function MenuMobile() {
                 );
               }
             })}
-            <Button
-              onClick={() => {
-                Navigate("/Singuplogin");
-              }}
+
+            <Box
               sx={{
                 width: "100%",
                 position: "absolute",
                 bottom: "0",
                 left: "0",
-                backgroundColor: "#F8CE46",
-                color: "#282A31",
-                ":hover": {
-                  backgroundColor: "#F8CE46",
-                },
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                justifyContent: "center",
+                alignItems: "center",
               }}
             >
-              Login / SingUp
-            </Button>
+              <Button
+                onClick={() => {
+                  Navigate("/RegisterForm");
+                  dispatch(setValue("داشبورد"));
+                }}
+                startIcon={<HowToRegIcon />}
+                variant="none"
+                sx={{
+                  width: "90%",
+                  gap: "10px",
+                  backgroundColor: "#F8CE46",
+                  color: "#282A31",
+                  ":hover": {
+                    backgroundColor: "#F8CE46",
+                  },
+                }}
+              >
+                Register
+              </Button>
+              <Button
+                onClick={() => {
+                  Navigate("/LoginForm");
+                  dispatch(setValue("داشبورد"));
+                }}
+                startIcon={<LoginIcon />}
+                variant="none"
+                sx={{
+                  width: "90%",
+                  gap: "10px",
+                  backgroundColor: "#F8CE46",
+                  color: "#282A31",
+                  ":hover": {
+                    backgroundColor: "#F8CE46",
+                  },
+                }}
+              >
+                Login
+              </Button>
+            </Box>
           </List>
         </Box>
       </Drawer>

@@ -9,6 +9,7 @@ import {
   Alert,
   Stack,
   Typography,
+  useRadioGroup,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import AssignmentIcon from "@mui/icons-material/Assignment";
@@ -23,6 +24,7 @@ function BoxCode() {
   const { addCode } = codeSlice.actions;
   const dispatch = useDispatch();
   const listCode = useSelector((state) => state.code.infoCode);
+  const userId = useSelector((state) => state.code.userLogin.idUser);
 
   const [addTitel, setAddTitel] = useState("");
   const [addCodeSave, setAddCodeSave] = useState("");
@@ -40,6 +42,7 @@ function BoxCode() {
         addCodeSave,
         addTextSave,
         edit,
+        userId,
       })
     );
     setShowSuccess(true);
