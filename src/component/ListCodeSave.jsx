@@ -10,6 +10,8 @@ import {
   InputAdornment,
   Snackbar,
   Alert,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
@@ -22,10 +24,12 @@ function ListCodeSave() {
   const dispatch = useDispatch();
   const listCode = useSelector((state) => state.code.infoCode);
   const loginUser = useSelector((state) => state.code.userLogin.idUser);
+  const show_category = useSelector((state) => state.code.category);
   const { RemoveCode, ShowEdit, EditCode } = codeSlice.actions;
   const [newAddTitel, setNewAddTitel] = useState("");
   const [newAddCodeSave, setNewAddCodeSave] = useState("");
   const [newAddTextSave, setNewAddTextSave] = useState("");
+  const [newCategory, setNewCategory] = useState("");
 
   const handleEdit = (ss) => {
     dispatch(
@@ -35,11 +39,13 @@ function ListCodeSave() {
         addTitel: newAddTitel,
         addCodeSave: newAddCodeSave,
         addTextSave: newAddTextSave,
+        category: newCategory,
       })
     );
     setNewAddTitel("");
     setNewAddCodeSave("");
     setNewAddTextSave("");
+    setNewCategory("");
   };
 
   return (
@@ -85,7 +91,7 @@ function ListCodeSave() {
                   gap: "20px",
                 }}
               >
-                <FormControl
+                <Box
                   variant="outlined"
                   sx={{
                     width: "20%",
@@ -95,37 +101,61 @@ function ListCodeSave() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    gap: "70px",
+                    gap: "60px",
                   }}
                 >
-                  <InputLabel
-                    color="info"
-                    sx={{
-                      fontFamily: "Byekan",
-                      fontSize: "22px",
-                      color: "#fff",
-                    }}
-                    htmlFor=""
-                  >
-                    عنوان جزوه
-                  </InputLabel>
-                  <Input
-                    onChange={(e) => setNewAddTitel(e.target.value)}
-                    value={newAddTitel}
-                    sx={{
-                      fontFamily: "Byekan",
-                      fontSize: "20px",
-                      backgroundColor: "#fff",
-                      borderRadius: "10px",
-                    }}
-                    multiline
-                    maxRows={4}
-                    startAdornment={
-                      <InputAdornment position="start">
-                        <AssignmentIcon />
-                      </InputAdornment>
-                    }
-                  />
+                  <FormControl>
+                    <InputLabel
+                      color="info"
+                      sx={{
+                        fontFamily: "Byekan",
+                        fontSize: "22px",
+                        color: "#fff",
+                      }}
+                      htmlFor=""
+                    >
+                      عنوان جزوه
+                    </InputLabel>
+                    <Input
+                      disableUnderline="false"
+                      onChange={(e) => setNewAddTitel(e.target.value)}
+                      value={newAddTitel}
+                      sx={{
+                        fontFamily: "Byekan",
+                        fontSize: "20px",
+                        backgroundColor: "#fff",
+                        borderRadius: "10px",
+                      }}
+                      multiline
+                      maxRows={4}
+                      startAdornment={
+                        <InputAdornment position="start">
+                          <AssignmentIcon />
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
+                  <FormControl variant="standard" sx={{ width: "80%" }}>
+                    <Select
+                      value={newCategory}
+                      disableUnderline="false"
+                      sx={{
+                        fontFamily: "Byekan",
+                        fontSize: "20px",
+                        width: "100%",
+                        backgroundColor: "#F8CE46",
+                        borderRadius: "10px",
+                      }}
+                      onChange={(e) => setNewCategory(e.target.value)}
+                    >
+                      {show_category.map((item) => {
+                        return (
+                          <MenuItem value={item.name}>{item.name}</MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+
                   <Button
                     onClick={() => handleEdit(item.id)}
                     sx={{
@@ -149,7 +179,7 @@ function ListCodeSave() {
                   >
                     Remove
                   </Button>
-                </FormControl>
+                </Box>
 
                 <FormControl
                   variant="filled"
@@ -237,8 +267,7 @@ function ListCodeSave() {
                   gap: "20px",
                 }}
               >
-                <FormControl
-                  variant="outlined"
+                <Box
                   sx={{
                     width: "20%",
                     height: "100%",
@@ -247,26 +276,47 @@ function ListCodeSave() {
                     flexDirection: "column",
                     alignItems: "center",
                     justifyContent: "space-between",
-                    gap: "70px",
+                    gap: "55px",
                   }}
                 >
-                  <Input
-                    disabled
-                    value={item.addTitel}
-                    sx={{
-                      fontFamily: "Byekan",
-                      fontSize: "20px",
-                      backgroundColor: "#F8CE46",
-                      borderRadius: "10px",
-                    }}
-                    multiline
-                    maxRows={4}
-                    startAdornment={
-                      <InputAdornment position="start">
-                        <AssignmentIcon />
-                      </InputAdornment>
-                    }
-                  />
+                  <FormControl sx={{ width: "100%" }}>
+                    <Input
+                      disabled
+                      value={item.addTitel}
+                      sx={{
+                        fontFamily: "Byekan",
+                        fontSize: "20px",
+                        backgroundColor: "#F8CE46",
+                        borderRadius: "10px",
+                        width: "100%",
+                      }}
+                      multiline
+                      maxRows={4}
+                      startAdornment={
+                        <InputAdornment position="start">
+                          <AssignmentIcon />
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
+
+                  <FormControl variant="standard" sx={{ width: "100%" }}>
+                    <Select
+                      value={item.category}
+                      disableUnderline="false"
+                      sx={{
+                        width: "100%",
+                        fontFamily: "Byekan",
+                        fontSize: "20px",
+                        backgroundColor: "#F8CE46",
+                        borderRadius: "10px",
+                      }}
+                      disabled
+                    >
+                      <MenuItem value={item.category}>{item.category}</MenuItem>
+                    </Select>
+                  </FormControl>
+
                   <Button
                     onClick={() =>
                       dispatch(ShowEdit({ id: item.id, edit: true }))
@@ -291,7 +341,7 @@ function ListCodeSave() {
                   >
                     Remove
                   </Button>
-                </FormControl>
+                </Box>
 
                 <FormControl
                   variant="filled"

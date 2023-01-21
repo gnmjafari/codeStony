@@ -156,12 +156,14 @@ function Home() {
                 >
                   <Typography
                     variant="h5"
-                    component="span"
+                    // component="span"
                     sx={{
                       color: "#282A31",
                       backgroundColor: "#F8CE46",
                       padding: "10px",
                       borderRadius: "20px",
+                      width: "80%",
+                      textAlign: "center",
                     }}
                   >
                     ایجاد حساب کاربری
@@ -179,7 +181,7 @@ function Home() {
                 </TimelineSeparator>
                 <TimelineContent sx={{ color: "#F8CE46", py: "25px", px: 2 }}>
                   <Typography
-                    variant="h4"
+                    variant="h5"
                     component="span"
                     sx={{
                       color: "#282A31",
@@ -203,7 +205,7 @@ function Home() {
                 </TimelineSeparator>
                 <TimelineContent sx={{ color: "#F8CE46", py: "25px", px: 2 }}>
                   <Typography
-                    variant="h4"
+                    variant="h5"
                     component="span"
                     sx={{
                       color: "#282A31",
@@ -225,7 +227,7 @@ function Home() {
                 </TimelineSeparator>
                 <TimelineContent sx={{ color: "#F8CE46", py: "25px", px: 2 }}>
                   <Typography
-                    variant="h4"
+                    variant="h5"
                     component="span"
                     sx={{
                       color: "#282A31",

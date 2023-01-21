@@ -28,6 +28,7 @@ function RegisterForm() {
     const emailRegexTest = emailRegex.test(email);
     const passwordRegexTest = passwordRegex.test(password);
     const usernameRegexTest = usernameRegex.test(username);
+
     if (
       emailRegexTest &&
       passwordRegexTest &&

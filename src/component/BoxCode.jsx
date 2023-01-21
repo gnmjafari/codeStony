@@ -10,6 +10,8 @@ import {
   Stack,
   Typography,
   useRadioGroup,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import AssignmentIcon from "@mui/icons-material/Assignment";
@@ -25,10 +27,12 @@ function BoxCode() {
   const dispatch = useDispatch();
   const listCode = useSelector((state) => state.code.infoCode);
   const userId = useSelector((state) => state.code.userLogin.idUser);
+  const show_category = useSelector((state) => state.code.category);
 
   const [addTitel, setAddTitel] = useState("");
   const [addCodeSave, setAddCodeSave] = useState("");
   const [addTextSave, setAddTextSave] = useState("");
+  const [category, setCategory] = useState("");
   const [edit, setEdit] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -41,6 +45,7 @@ function BoxCode() {
         addTitel,
         addCodeSave,
         addTextSave,
+        category,
         edit,
         userId,
       })
@@ -74,47 +79,123 @@ function BoxCode() {
         gap: "70px",
       }}
     >
-      <FormControl sx={{ width: "50%" }}>
-        <Typography
-          variant="h4"
+      <Box
+        sx={{
+          width: "90%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          flexDirection: "row",
+        }}
+      >
+        <FormControl
           sx={{
-            fontFamily: "Byekan",
+            width: "45%",
             display: "flex",
-            justifyContent: "center",
+            flexDirection: "column",
             alignItems: "center",
-            gap: "10px",
-            backgroundColor: "#F8CE46",
-            padding: "10px",
-            borderRadius: "20px",
-            color: "#282A31",
-            width: "40%",
-            margin: "auto",
-            marginBottom: "20px",
-            boxShadow:
-              "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+            justifyContent: "center",
+            m: 1,
           }}
         >
-          <NotesIcon />
-          عنوان جزوه
-        </Typography>
-        <Input
-          disableUnderline="false"
-          value={addTitel}
-          onChange={(e) => setAddTitel(e.target.value)}
+          <Typography
+            variant="h4"
+            sx={{
+              fontFamily: "Byekan",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+              backgroundColor: "#F8CE46",
+              padding: "10px",
+              borderRadius: "20px",
+              color: "#282A31",
+              width: "100%",
+              margin: "auto",
+              marginBottom: "20px",
+              boxShadow:
+                "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+            }}
+          >
+            <NotesIcon />
+            عنوان جزوه
+          </Typography>
+          <Input
+            disableUnderline="false"
+            value={addTitel}
+            onChange={(e) => setAddTitel(e.target.value)}
+            sx={{
+              fontFamily: "Byekan",
+              width: "80%",
+              fontSize: "20px",
+              backgroundColor: "#fff",
+              borderRadius: "20px",
+              color: "#282A31",
+              padding: "9px 14px",
+              boxShadow:
+                "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px",
+            }}
+            multiline
+            maxRows={4}
+          />
+        </FormControl>
+
+        <FormControl
           sx={{
-            fontFamily: "Byekan",
-            fontSize: "20px",
-            backgroundColor: "#fff",
-            borderRadius: "20px",
-            color: "#282A31",
-            padding: "5px 10px",
-            boxShadow:
-              "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px",
+            width: "45%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            m: 1,
+            minWidth: 120,
           }}
-          multiline
-          maxRows={4}
-        />
-      </FormControl>
+          variant="standard"
+        >
+          <Typography
+            variant="h4"
+            sx={{
+              fontFamily: "Byekan",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "10px",
+              backgroundColor: "#F8CE46",
+              padding: "10px",
+              borderRadius: "20px",
+              color: "#282A31",
+              width: "100%",
+              margin: "auto",
+              marginBottom: "20px",
+              boxShadow:
+                "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
+            }}
+          >
+            <NotesIcon />
+            دسته بندی
+          </Typography>
+          <Select
+            value={category}
+            disableUnderline="false"
+            sx={{
+              width: "80%",
+              fontFamily: "Byekan",
+              fontSize: "20px",
+              backgroundColor: "#fff",
+              borderRadius: "20px",
+              color: "#282A31",
+              padding: "5px 10px",
+              boxShadow:
+                "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px",
+            }}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            {show_category.map((item) => {
+              return <MenuItem value={item.name}>{item.name}</MenuItem>;
+            })}
+          </Select>
+        </FormControl>
+      </Box>
 
       <FormControl
         variant="filled"

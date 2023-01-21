@@ -7,6 +7,7 @@ const codeSlice = createSlice({
     infoCode: [],
     users: [],
     userLogin: [],
+    category: [],
   },
   reducers: {
     addCode: (state, action) => {
@@ -31,6 +32,7 @@ const codeSlice = createSlice({
           item.addTitel = action.payload.addTitel;
           item.addCodeSave = action.payload.addCodeSave;
           item.addTextSave = action.payload.addTextSave;
+          item.category = action.payload.category;
         }
       });
     },
@@ -56,6 +58,9 @@ const codeSlice = createSlice({
     },
     logOut: (state, action) => {
       state.userLogin = action.payload;
+    },
+    AddCategory: (state, action) => {
+      state.category.push(action.payload);
     },
   },
 });
