@@ -10,6 +10,7 @@ import HowToRegIcon from "@mui/icons-material/HowToReg";
 
 function Dashboard() {
   const { AddCategory } = codeSlice.actions;
+  const listcode = useSelector((state) => state.code.infoCode);
   const show_category = useSelector((state) => state.code.category);
   const userLogin = useSelector((state) => state.code.userLogin);
   const logiin = useSelector((state) => state.code.users);
@@ -21,7 +22,9 @@ function Dashboard() {
   console.log(show_category);
 
   function handle_add_category() {
-    dispatch(AddCategory({ name: add_category }));
+    dispatch(
+      AddCategory({ name: add_category, category_userId: userLogin.idUser })
+    );
     setAdd_category("");
     console.log("ali");
   }
@@ -121,7 +124,7 @@ function Dashboard() {
               width: "90%",
               margin: "auto",
               justifyContent: "space-between",
-              alignItems: "center",
+              alignItems: "flex-start",
               borderRadius: "20px",
               flexWrap: "wrap",
             }}
@@ -131,20 +134,52 @@ function Dashboard() {
                 display: "flex",
                 flexDirection: "column",
                 gap: "30px",
+                fontFamily: "Byekan",
               }}
             >
-              <Typography variant="h4">نام : {userLogin.name}</Typography>
-              <Typography variant="h4">
+              <Typography variant="h4" sx={{ fontFamily: "Byekan" }}>
+                نام : {userLogin.name}
+              </Typography>
+              <Typography variant="h4" sx={{ fontFamily: "Byekan" }}>
                 نام خانوادگی : {userLogin.family}
               </Typography>
-              <Typography variant="h4">ایمیل : {userLogin.email}</Typography>
+              <Typography variant="h4" sx={{ fontFamily: "Byekan" }}>
+                ایمیل : {userLogin.email}
+              </Typography>
             </Box>
             <Box sx={{ display: "flex", flexDirection: "column", gap: "30px" }}>
-              <Typography variant="h4">تاریخ عضویت : 20</Typography>
-              <Typography variant="h4">
-                {userLogin.Date_of_registration}
+              <Typography variant="h4" sx={{ fontFamily: "Byekan" }}>
+                تاریخ عضویت : 20
               </Typography>
-              <Typography variant="h4">ایمیل : {userLogin.email}</Typography>
+              <Typography variant="h4" sx={{ fontFamily: "Byekan" }}>
+                تعداد کد های ذخیره شده :{" "}
+                {
+                  listcode.filter((item) => item.userId === userLogin.idUser)
+                    .length
+                }
+              </Typography>
+              <Typography
+                variant="h4"
+                sx={{
+                  display: "flex",
+                  gap: "15px",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  fontFamily: "Byekan",
+                }}
+              >
+                دسته بندی ها :{" "}
+                {show_category.map((item) => {
+                  if (item.category_userId === userLogin.idUser) {
+                    return (
+                      <Typography variant="h6" sx={{ fontFamily: "Byekan" }}>
+                        {" "}
+                        {item.name}{" "}
+                      </Typography>
+                    );
+                  }
+                })}
+              </Typography>
             </Box>
           </Box>
           <Box

@@ -191,7 +191,9 @@ function BoxCode() {
             onChange={(e) => setCategory(e.target.value)}
           >
             {show_category.map((item) => {
-              return <MenuItem value={item.name}>{item.name}</MenuItem>;
+              if (item.category_userId === userId) {
+                return <MenuItem value={item.name}>{item.name}</MenuItem>;
+              }
             })}
           </Select>
         </FormControl>

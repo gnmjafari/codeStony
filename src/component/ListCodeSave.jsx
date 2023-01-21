@@ -1,21 +1,21 @@
 import {
   Box,
   Button,
-  Container,
   Stack,
   Typography,
   FormControl,
   InputLabel,
   Input,
   InputAdornment,
-  Snackbar,
-  Alert,
   Select,
   MenuItem,
+  Paper,
+  IconButton,
+  InputBase,
 } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
-import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import SpeakerNotesIcon from "@mui/icons-material/SpeakerNotes";
+import ManageSearchIcon from "@mui/icons-material/ManageSearch";
 import React, { useEffect, useState } from "react";
 import codeSlice from "./Store/CodeSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,6 +30,8 @@ function ListCodeSave() {
   const [newAddCodeSave, setNewAddCodeSave] = useState("");
   const [newAddTextSave, setNewAddTextSave] = useState("");
   const [newCategory, setNewCategory] = useState("");
+  const [search, setSearch] = useState("");
+  console.log(search);
 
   const handleEdit = (ss) => {
     dispatch(
@@ -50,26 +52,119 @@ function ListCodeSave() {
 
   return (
     <>
-      <Typography
-        variant="h4"
+      <Box
         sx={{
           display: "flex",
+          justifyContent: "space-around",
           alignItems: "center",
-          gap: "15px",
-          justifyContent: "center",
-          backgroundImage: "linear-gradient(#FB9886, #FC5B58)",
-          color: "#fff",
-          width: "400px",
-          margin: "auto",
-          marginBottom: "50px",
           marginTop: "200px",
-          borderRadius: "20px",
-          padding: "5px",
+          marginBottom: "50px",
         }}
       >
-        <SpeakerNotesIcon />
-        {listCode.length == 0 ? "There is no code" : "All Codes"}
-      </Typography>
+        {listCode.length == 0 ? (
+          <Typography
+            variant="h4"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "15px",
+              justifyContent: "center",
+              // backgroundImage: "linear-gradient(#FB9886, #FC5B58)",
+              color: "#282A31",
+              backgroundColor: "#fff",
+              width: "400px",
+              margin: "auto",
+              borderRadius: "20px",
+              padding: "5px",
+            }}
+          >
+            <SpeakerNotesIcon />
+            "There is no code"
+          </Typography>
+        ) : (
+          <>
+            <Paper
+              sx={{
+                p: "5px 10px",
+                display: "flex",
+                alignItems: "center",
+                width: 400,
+              }}
+            >
+              <InputBase
+                sx={{ ml: 1, flex: 1 }}
+                placeholder="Search Titel  Code"
+                // inputProps={{ "aria-label": "search google maps" }}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <IconButton type="button" sx={{ p: "5px, 10px" }}>
+                <ManageSearchIcon />
+              </IconButton>
+            </Paper>
+            <Typography
+              variant="h4"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "15px",
+                justifyContent: "center",
+                // backgroundImage: "linear-gradient(#FB9886, #FC5B58)",
+                color: "#282A31",
+                backgroundColor: "#fff",
+                width: "400px",
+                borderRadius: "20px",
+                padding: "5px",
+              }}
+            >
+              All Codes
+            </Typography>
+            <FormControl
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                m: 1,
+                minWidth: 120,
+                position: "relative",
+              }}
+              variant="standard"
+            >
+              <IconButton
+                type="button"
+                sx={{
+                  position: "absolute",
+                  color: "black",
+                  left: "5px",
+                  zIndex: "10",
+                }}
+              >
+                <SpeakerNotesIcon />
+              </IconButton>
+              <Select
+                disableUnderline="false"
+                sx={{
+                  width: "400px",
+                  fontFamily: "Byekan",
+                  fontSize: "20px",
+                  backgroundColor: "#fff",
+                  borderRadius: "20px",
+                  color: "#282A31",
+                  padding: "5px 10px",
+                  boxShadow:
+                    "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px",
+                }}
+              >
+                {show_category.map((item) => {
+                  if (item.category_userId === loginUser) {
+                    return <MenuItem value={item.name}>{item.name}</MenuItem>;
+                  }
+                })}
+              </Select>
+            </FormControl>
+          </>
+        )}
+      </Box>
       <Stack
         direction="column"
         justifyContent="flex-start"
@@ -149,9 +244,11 @@ function ListCodeSave() {
                       onChange={(e) => setNewCategory(e.target.value)}
                     >
                       {show_category.map((item) => {
-                        return (
-                          <MenuItem value={item.name}>{item.name}</MenuItem>
-                        );
+                        if (item.category_userId === loginUser) {
+                          return (
+                            <MenuItem value={item.name}>{item.name}</MenuItem>
+                          );
+                        }
                       })}
                     </Select>
                   </FormControl>
@@ -254,7 +351,10 @@ function ListCodeSave() {
               </Box>
             );
           }
-          if (item.userId === loginUser) {
+          if (
+            (search === "" || search === item.addTitel) &&
+            item.userId === loginUser
+          ) {
             return (
               <Box
                 key={index}
