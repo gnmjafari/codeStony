@@ -236,7 +236,7 @@ function Dashboard() {
                 maxRows={4}
               />
               <Button
-                onClick={handle_add_category}
+                onClick={() => handle_add_category()}
                 variant="none"
                 sx={{
                   width: "200px",
