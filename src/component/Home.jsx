@@ -49,7 +49,8 @@ function Home() {
         style={{
           backgroundColor: "#282A31",
           height: "100%",
-          paddingTop: "150px",
+          paddingTop: "50px",
+          marginRight: "250px",
         }}
       >
         {isMatchMd ? (

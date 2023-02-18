@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { styled } from "@mui/material/styles";
+import NotesIcon from "@mui/icons-material/Notes";
+import EventNoteIcon from "@mui/icons-material/EventNote";
+import CodeIcon from "@mui/icons-material/Code";
+import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
+import StepConnector, {
+  stepConnectorClasses,
+} from "@mui/material/StepConnector";
 import {
   Typography,
   Button,
-  StepLabel,
-  Step,
-  Stepper,
   Box,
   FormControl,
   Input,
@@ -12,15 +18,99 @@ import {
   Snackbar,
   Alert,
   MenuItem,
+  Stack,
+  Stepper,
+  Step,
+  StepLabel,
 } from "@mui/material/";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import NotesIcon from "@mui/icons-material/Notes";
-import EventNoteIcon from "@mui/icons-material/EventNote";
-import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
 import codeSlice from "../Store/CodeSlice";
 
-const steps = ["Add Title & Add Category", "Add TextCode", "Add Code"];
+const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
+  [`&.${stepConnectorClasses.alternativeLabel}`]: {
+    top: 22,
+  },
+  [`&.${stepConnectorClasses.active}`]: {
+    [`& .${stepConnectorClasses.line}`]: {
+      backgroundImage:
+        "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
+    },
+  },
+  [`&.${stepConnectorClasses.completed}`]: {
+    [`& .${stepConnectorClasses.line}`]: {
+      backgroundImage:
+        "linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)",
+    },
+  },
+  [`& .${stepConnectorClasses.line}`]: {
+    height: 3,
+    border: 0,
+    backgroundColor:
+      theme.palette.mode === "dark" ? theme.palette.grey[800] : "#eaeaf0",
+    borderRadius: 1,
+  },
+}));
+
+const ColorlibStepIconRoot = styled("div")(({ theme, ownerState }) => ({
+  backgroundColor:
+    theme.palette.mode === "dark" ? theme.palette.grey[700] : "#ccc",
+  zIndex: 1,
+  color: "#fff",
+  width: 50,
+  height: 50,
+  display: "flex",
+  borderRadius: "50%",
+  justifyContent: "center",
+  alignItems: "center",
+  ...(ownerState.active && {
+    backgroundImage:
+      "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)",
+    boxShadow: "0 4px 10px 0 rgba(0,0,0,.25)",
+  }),
+  ...(ownerState.completed && {
+    backgroundImage:
+      "linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)",
+  }),
+}));
+
+function ColorlibStepIcon(props) {
+  const { active, completed, className } = props;
+
+  const icons = {
+    1: <NotesIcon />,
+    2: <EventNoteIcon />,
+    3: <CodeIcon />,
+  };
+
+  return (
+    <ColorlibStepIconRoot
+      ownerState={{ completed, active }}
+      className={className}
+    >
+      {icons[String(props.icon)]}
+    </ColorlibStepIconRoot>
+  );
+}
+
+ColorlibStepIcon.propTypes = {
+  /**
+   * Whether this step is active.
+   * @default false
+   */
+  active: PropTypes.bool,
+  className: PropTypes.string,
+  /**
+   * Mark the step as completed. Is passed to child components.
+   * @default false
+   */
+  completed: PropTypes.bool,
+  /**
+   * The label displayed in the step icon.
+   */
+  icon: PropTypes.node,
+};
+
+const steps = ["Add Title & Category", "Add Text Code", "Add Source Code"];
 
 function StepperAddCode() {
   const { addCode } = codeSlice.actions;
@@ -35,7 +125,6 @@ function StepperAddCode() {
   const [category, setCategory] = useState("");
   const [edit, setEdit] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
 
@@ -106,22 +195,17 @@ function StepperAddCode() {
   }
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Stepper activeStep={activeStep}>
-        {steps.map((label, index) => {
-          const stepProps = {};
-          const labelProps = {};
-          if (isStepSkipped(index)) {
-            stepProps.completed = false;
-          }
-          return (
-            <Step sx={{ color: "#282A31" }} key={label} {...stepProps}>
-              <StepLabel sx={{ fontSize: "25px", gap: "5px" }} {...labelProps}>
-                {label}
-              </StepLabel>
-            </Step>
-          );
-        })}
+    <Stack sx={{ width: "100%", direction: "ltr" }}>
+      <Stepper
+        alternativeLabel
+        activeStep={activeStep}
+        connector={<ColorlibConnector />}
+      >
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+          </Step>
+        ))}
       </Stepper>
       {activeStep === 0 ? (
         <>
@@ -139,7 +223,7 @@ function StepperAddCode() {
               sx={{
                 width: "100%",
                 display: "flex",
-                flexDirection: "row",
+                flexDirection: "colum",
                 alignItems: "center",
                 justifyContent: "flex-start",
                 gap: "20px",
@@ -149,7 +233,7 @@ function StepperAddCode() {
               <Typography
                 variant="h4"
                 sx={{
-                  fontFamily: "Byekan",
+                  // fontFamily: "Byekan",
                   display: "flex",
                   justifyContent: "flex-start",
                   alignItems: "center",
@@ -160,15 +244,15 @@ function StepperAddCode() {
                   color: "#282A31",
                 }}
               >
-                <NotesIcon fontSize="large" />
-                عنوان جزوه
+                {/* <NotesIcon fontSize="large" /> */}
+                Title
               </Typography>
               <Input
                 disableUnderline="false"
                 value={addTitel}
                 onChange={(e) => setAddTitel(e.target.value)}
                 sx={{
-                  fontFamily: "Byekan",
+                  // fontFamily: "Byekan",
                   width: "70%",
                   fontSize: "20px",
                   backgroundColor: "#fff",
@@ -187,7 +271,7 @@ function StepperAddCode() {
               sx={{
                 width: "100%",
                 display: "flex",
-                flexDirection: "row",
+                flexDirection: "colum",
                 alignItems: "center",
                 justifyContent: "flex-start",
                 m: 1,
@@ -210,8 +294,8 @@ function StepperAddCode() {
                   color: "#282A31",
                 }}
               >
-                <NotesIcon fontSize="large" />
-                دسته بندی
+                {/* <NotesIcon fontSize="large" /> */}
+                Category
               </Typography>
               <Select
                 value={category}
@@ -246,6 +330,10 @@ function StepperAddCode() {
                 color: "#fff",
                 fontSize: "20px",
                 backgroundColor: "#282A31",
+                ":hover": {
+                  backgroundColor: "#fff",
+                  color: "#282A31",
+                },
               }}
             >
               Back
@@ -260,6 +348,10 @@ function StepperAddCode() {
                   color: "#fff",
                   fontSize: "20px",
                   backgroundColor: "#282A31",
+                  ":hover": {
+                    backgroundColor: "#fff",
+                    color: "#282A31",
+                  },
                 }}
               >
                 Skip
@@ -271,6 +363,10 @@ function StepperAddCode() {
                 color: "#fff",
                 fontSize: "20px",
                 backgroundColor: "#282A31",
+                ":hover": {
+                  backgroundColor: "#fff",
+                  color: "#282A31",
+                },
               }}
               onClick={handleNext}
             >
@@ -308,15 +404,15 @@ function StepperAddCode() {
                 fontWeight: "600",
               }}
             >
+              Text Code
               <EventNoteIcon fontSize="large" />
-              متن جزوه
             </Typography>
             <Input
               disableUnderline
               value={addTextSave}
               onChange={(e) => setAddTextSave(e.target.value)}
               sx={{
-                fontFamily: "Byekan",
+                // fontFamily: "Byekan",
                 fontSize: "20px",
                 textAlign: "left",
                 backgroundColor: "#fff",
@@ -343,6 +439,10 @@ function StepperAddCode() {
                 color: "#fff",
                 fontSize: "20px",
                 backgroundColor: "#282A31",
+                ":hover": {
+                  backgroundColor: "#fff",
+                  color: "#282A31",
+                },
               }}
             >
               Back
@@ -357,6 +457,10 @@ function StepperAddCode() {
                   color: "#fff",
                   fontSize: "20px",
                   backgroundColor: "#282A31",
+                  ":hover": {
+                    backgroundColor: "#fff",
+                    color: "#282A31",
+                  },
                 }}
               >
                 Skip
@@ -368,6 +472,10 @@ function StepperAddCode() {
                 color: "#fff",
                 fontSize: "20px",
                 backgroundColor: "#282A31",
+                ":hover": {
+                  backgroundColor: "#fff",
+                  color: "#282A31",
+                },
               }}
               onClick={handleNext}
             >
@@ -393,7 +501,7 @@ function StepperAddCode() {
             <Typography
               variant="h4"
               sx={{
-                fontFamily: "Byekan",
+                // fontFamily: "Byekan",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -408,8 +516,8 @@ function StepperAddCode() {
                 fontWeight: "600",
               }}
             >
-              متن کد
-              <EventNoteIcon fontSize="large" />
+              <CodeIcon fontSize="large" />
+              Source Code
             </Typography>
             <Input
               disableUnderline="false"
@@ -443,6 +551,10 @@ function StepperAddCode() {
                 color: "#fff",
                 fontSize: "20px",
                 backgroundColor: "#282A31",
+                ":hover": {
+                  backgroundColor: "#fff",
+                  color: "#282A31",
+                },
               }}
             >
               Back
@@ -457,6 +569,10 @@ function StepperAddCode() {
                   color: "#fff",
                   fontSize: "20px",
                   backgroundColor: "#282A31",
+                  ":hover": {
+                    backgroundColor: "#fff",
+                    color: "#282A31",
+                  },
                 }}
               >
                 Skip
@@ -468,6 +584,10 @@ function StepperAddCode() {
                 color: "#fff",
                 fontSize: "20px",
                 backgroundColor: "#282A31",
+                ":hover": {
+                  backgroundColor: "#fff",
+                  color: "#282A31",
+                },
               }}
               onClick={handleNext}
             >
@@ -493,7 +613,8 @@ function StepperAddCode() {
               color: "#fff",
               backgroundColor: "#282A31",
               ":hover": {
-                backgroundColor: "#F8CE46",
+                backgroundColor: "#fff",
+                color: "#282A31",
               },
             }}
             startIcon={<AssignmentTurnedInIcon fontSize="large" />}
@@ -533,7 +654,7 @@ function StepperAddCode() {
       ) : (
         ""
       )}
-    </Box>
+    </Stack>
   );
 }
 
