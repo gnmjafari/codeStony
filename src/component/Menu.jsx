@@ -13,6 +13,10 @@ import {
 } from "@mui/material";
 import MenuMobile from "./MenuMobile";
 import LoginIcon from "@mui/icons-material/Login";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
+import ContactSupportOutlinedIcon from "@mui/icons-material/ContactSupportOutlined";
+import PhoneEnabledOutlinedIcon from "@mui/icons-material/PhoneEnabledOutlined";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import codeSlice from "./Store/CodeSlice";
@@ -20,7 +24,7 @@ import MenuValue from "./Store/MenuValue";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 
 function Menu() {
-  const pages = ["صفحه اصلی", "داشبورد", "ارتباط با ما", "َدرباره پروژه"];
+  const pages = ["صفحه اصلی", "داشبورد", "ارتباط با ما", "درباره پروژه"];
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   const Navigate = useNavigate();
@@ -32,15 +36,37 @@ function Menu() {
   console.log(count);
 
   return (
-    <AppBar dir="rtl" sx={{ backgroundColor: "#F8CE46", color: "#fff" }}>
-      <Toolbar>
+    <AppBar
+      dir="rtl"
+      position="fixed"
+      sx={{
+        // backgroundColor: "#282A31",
+        backgroundColor: "#F8CE46",
+        color: "#fff",
+        right: "0px",
+        bottom: "0px",
+        width: "250px",
+      }}
+    >
+      <Toolbar
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          gap: "30px",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          paddingTop: "15px",
+          paddingBottom: "15px",
+        }}
+      >
         {isMatch ? (
           <MenuMobile />
         ) : (
           <>
             <Typography
               variant="h5"
-              sx={{ marginLeft: "15px", color: "#fff", fontWeight: "700" }}
+              sx={{ marginLeft: "15px", color: "#282A31", fontWeight: "700" }}
             >
               Code Stony
             </Typography>
@@ -52,18 +78,28 @@ function Menu() {
                 "& .MuiTabs-indicator": {
                   backgroundColor: "#282A31",
                 },
+                alignItems: "flex-start",
               }}
+              orientation="vertical"
             >
               {pages.map((page, index) => {
                 if (page == "صفحه اصلی") {
                   return (
                     <Tab
+                      icon={<HomeOutlinedIcon fontSize="medium" />}
+                      iconPosition="start"
                       value="صفحه اصلی"
                       onClick={() => {
                         Navigate("/Home");
                         dispatch(setValue("صفحه اصلی"));
                       }}
-                      sx={{ fontFamily: "Byekan", fontSize: "18px" }}
+                      sx={{
+                        fontFamily: "Byekan",
+                        fontSize: "20px",
+                        display: "flex",
+                        gap: "10px",
+                        justifyContent: "flex-start",
+                      }}
                       key={index}
                       label={page}
                     />
@@ -72,12 +108,20 @@ function Menu() {
                 if (page == "داشبورد") {
                   return (
                     <Tab
+                      icon={<DashboardOutlinedIcon fontSize="medium" />}
+                      iconPosition="start"
                       value="داشبورد"
                       onClick={() => {
                         Navigate("/Dashboard");
                         dispatch(setValue("داشبورد"));
                       }}
-                      sx={{ fontFamily: "Byekan", fontSize: "18px" }}
+                      sx={{
+                        fontFamily: "Byekan",
+                        fontSize: "20px",
+                        display: "flex",
+                        gap: "10px",
+                        justifyContent: "flex-start",
+                      }}
                       key={index}
                       label={page}
                     />
@@ -86,26 +130,42 @@ function Menu() {
                 if (page == "ارتباط با ما") {
                   return (
                     <Tab
+                      icon={<PhoneEnabledOutlinedIcon fontSize="medium" />}
+                      iconPosition="start"
                       value="ارتباط با ما"
                       onClick={() => {
                         Navigate("/ContactUs");
                         dispatch(setValue("ارتباط با ما"));
                       }}
-                      sx={{ fontFamily: "Byekan", fontSize: "18px" }}
+                      sx={{
+                        fontFamily: "Byekan",
+                        fontSize: "20px",
+                        display: "flex",
+                        gap: "10px",
+                        justifyContent: "flex-start",
+                      }}
                       key={index}
                       label={page}
                     />
                   );
                 }
-                if (page == "َدرباره پروژه") {
+                if (page == "درباره پروژه") {
                   return (
                     <Tab
-                      value="َدرباره پروژه"
+                      icon={<ContactSupportOutlinedIcon fontSize="medium" />}
+                      iconPosition="start"
+                      value="درباره پروژه"
                       onClick={() => {
                         Navigate("/About");
-                        dispatch(setValue("َدرباره پروژه"));
+                        dispatch(setValue("درباره پروژه"));
                       }}
-                      sx={{ fontFamily: "Byekan", fontSize: "18px" }}
+                      sx={{
+                        fontFamily: "Byekan",
+                        fontSize: "20px",
+                        display: "flex",
+                        gap: "10px",
+                        justifyContent: "flex-start",
+                      }}
                       key={index}
                       label={page}
                     />
@@ -115,7 +175,7 @@ function Menu() {
             </Tabs>
             {userLogin.length == 0 ? (
               <>
-                <Box sx={{ marginRight: "auto" }}>
+                <Box sx={{ marginTop: "auto" }}>
                   <Button
                     onClick={() => {
                       Navigate("/RegisterForm");
@@ -143,7 +203,6 @@ function Menu() {
                     variant="none"
                     sx={{
                       gap: "10px",
-                      marginRight: "15px",
                       backgroundColor: "#282A31",
                       color: "#fff",
                       ":hover": {
@@ -164,13 +223,15 @@ function Menu() {
                   startIcon={<HowToRegIcon />}
                   variant="none"
                   sx={{
+                    justifyContent: "center",
                     gap: "10px",
                     backgroundColor: "#282A31",
-                    marginRight: "auto",
                     color: "#fff",
                     ":hover": {
                       backgroundColor: "#282A31",
                     },
+                    marginTop: "auto",
+                    width: "100%",
                   }}
                 >
                   logOut

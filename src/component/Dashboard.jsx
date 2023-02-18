@@ -1,12 +1,29 @@
-import { Box, Typography, Button, FormControl, Input } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  FormControl,
+  Input,
+  Card,
+  CardHeader,
+  Avatar,
+  CardContent,
+} from "@mui/material";
 import React, { useState } from "react";
-import BoxCode from "./BoxCode";
 import ListCodeSave from "./ListCodeSave";
 import codeSlice from "./Store/CodeSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
+import Add_Category from "./Add_Category";
+import CardDashboard from "./useComponent/CardDashboard";
+import img2 from "../component/image/2.jpg";
+import img3 from "../component/image/3.jpg";
+import img5 from "../component/image/5.jpg";
+import ProfileItem from "./useComponent/ProfileItem";
+import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
+import StepperAddCode from "./AddCode/StepperAddCode";
 
 function Dashboard() {
   const { AddCategory } = codeSlice.actions;
@@ -32,10 +49,18 @@ function Dashboard() {
   return (
     <Box
       sx={{
+        minHeight: "100vh",
+        maxHeight: "100%",
         width: "100%",
+        // backgroundColor: "#100C08",
         backgroundColor: "#282A31",
-        paddingTop: "100px",
+        paddingTop: "50px",
         direction: "rtl",
+        paddingRight: "300px",
+        paddingLeft: "50px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "50px",
       }}
     >
       {userLogin.length == 0 ? (
@@ -114,150 +139,157 @@ function Dashboard() {
         </Box>
       ) : (
         <>
-          <Box
+          <Card
             sx={{
               backgroundColor: "#F8CE46",
-              padding: "10px 20px",
               display: "flex",
-              flexDirection: "row",
-              gap: "20px",
-              width: "90%",
-              margin: "auto",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-              borderRadius: "20px",
-              flexWrap: "wrap",
+              alignItems: "center",
             }}
           >
-            <Box
+            <CardHeader
+              avatar={
+                <Avatar sx={{ bgcolor: "#353535" }} aria-label="avatar">
+                  Aj
+                </Avatar>
+              }
+            />
+            <CardContent
               sx={{
                 display: "flex",
-                flexDirection: "column",
-                gap: "30px",
-                fontFamily: "Byekan",
+                alignItems: "center",
+                gap: "70px",
+                padding: "24px",
               }}
             >
-              <Typography variant="h4" sx={{ fontFamily: "Byekan" }}>
-                نام : {userLogin.name}
-              </Typography>
-              <Typography variant="h4" sx={{ fontFamily: "Byekan" }}>
-                نام خانوادگی : {userLogin.family}
-              </Typography>
-              <Typography variant="h4" sx={{ fontFamily: "Byekan" }}>
-                ایمیل : {userLogin.email}
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "30px" }}>
-              <Typography variant="h4" sx={{ fontFamily: "Byekan" }}>
-                تاریخ عضویت : 20
-              </Typography>
-              <Typography variant="h4" sx={{ fontFamily: "Byekan" }}>
-                تعداد کد های ذخیره شده :{" "}
-                {
+              <ProfileItem
+                Title="Name"
+                info={userLogin.name}
+                sx={{ fontSize: "17px" }}
+                childStyle={{ fontWeight: "600" }}
+              />
+              <ProfileItem
+                Title="Last Name"
+                info={userLogin.family}
+                sx={{ fontSize: "17px" }}
+                childStyle={{ fontWeight: "600" }}
+              />
+              <ProfileItem
+                Title="Email"
+                info={userLogin.email}
+                sx={{ fontSize: "17px" }}
+                childStyle={{ fontWeight: "600" }}
+              />
+              <ProfileItem
+                sx={{ fontSize: "17px" }}
+                childStyle={{ fontWeight: "600" }}
+                Title="All Code"
+                info={
                   listcode.filter((item) => item.userId === userLogin.idUser)
                     .length
                 }
-              </Typography>
-              <Typography
-                variant="h4"
-                sx={{
-                  display: "flex",
-                  gap: "15px",
-                  alignItems: "center",
-                  flexWrap: "wrap",
-                  fontFamily: "Byekan",
-                }}
-              >
-                دسته بندی ها :{" "}
-                {show_category.map((item) => {
-                  if (item.category_userId === userLogin.idUser) {
-                    return (
-                      <Typography variant="h6" sx={{ fontFamily: "Byekan" }}>
-                        {" "}
-                        {item.name}{" "}
-                      </Typography>
-                    );
-                  }
-                })}
-              </Typography>
-            </Box>
-          </Box>
+              />
+            </CardContent>
+          </Card>
+
           <Box
             sx={{
-              backgroundColor: "#F8CE46",
-              padding: "20px 20px",
               display: "flex",
-              flexDirection: "row",
-              gap: "20px",
-              width: "80%",
-              margin: "auto",
-              justifyContent: "center",
+              justifyContent: "space-between",
               alignItems: "center",
-              borderRadius: "20px",
-              marginTop: "80px",
+              gap: "20px",
+              width: "100%",
+              color: "#fff",
             }}
           >
-            <FormControl sx={{ width: "50%" }}>
-              <Typography
-                variant="h4"
-                sx={{
-                  fontFamily: "Byekan",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "10px",
-                  padding: "10px",
-                  borderRadius: "20px",
-                  color: "#282A31",
-                  width: "60%",
-                  margin: "auto",
-                  marginBottom: "20px",
-                  boxShadow:
-                    "rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px",
-                }}
-              >
-                اضافه کردن دسته بندی
-              </Typography>
-              <Input
-                onChange={(e) => setAdd_category(e.target.value)}
-                value={add_category}
-                disableUnderline="false"
-                sx={{
-                  fontFamily: "Byekan",
-                  fontSize: "20px",
-                  backgroundColor: "#fff",
-                  borderRadius: "20px",
-                  color: "#282A31",
-                  padding: "5px 10px",
-                  boxShadow:
-                    "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px",
-                }}
-                multiline
-                maxRows={4}
-              />
-              <Button
-                onClick={() => handle_add_category()}
-                variant="none"
-                sx={{
-                  width: "200px",
-                  padding: "10px 20px",
-                  gap: "10px",
-                  margin: "auto",
-                  marginTop: "20px",
-                  backgroundColor: "#282A31",
-                  fontSize: "30px",
-                  color: "#fff",
-                  ":hover": {
-                    backgroundColor: "#282A31",
-                  },
-                }}
-              >
-                ثبت کن
-              </Button>
-            </FormControl>
+            <CardDashboard TitleBtn="Add New Category" img={img5} />
+            <CardDashboard TitleBtn="Add New Note" img={img3} />
+            <CardDashboard TitleBtn="Show All Note" img={img2} />
           </Box>
-          <BoxCode />
-          <ListCodeSave />
+
+          <Card
+            sx={{
+              backgroundColor: "#F8CE46",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "24px 16px",
+              gap: "20px",
+            }}
+          >
+            <Typography
+              variant="h5"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                marginRight: "16px",
+              }}
+            >
+              <CategoryOutlinedIcon fontSize="large" />
+              Add New Category
+            </Typography>
+            <Input
+              onChange={(e) => setAdd_category(e.target.value)}
+              value={add_category}
+              disableUnderline="false"
+              placeholder="Add New Category"
+              sx={{
+                width: "60%",
+                fontFamily: "Byekan",
+                fontSize: "20px",
+                backgroundColor: "#fff",
+                borderRadius: "10px",
+                color: "#282A31",
+                padding: "5px 10px",
+                boxShadow:
+                  "rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px",
+              }}
+              multiline
+              maxRows={4}
+            />
+            <Button
+              onClick={() => handle_add_category()}
+              variant="none"
+              sx={{
+                padding: "0px 20px",
+                gap: "10px",
+                backgroundColor: "#282A31",
+                fontSize: "25px",
+                color: "#fff",
+                ":hover": {
+                  backgroundColor: "#282A31",
+                },
+              }}
+            >
+              ثبت کن
+            </Button>
+          </Card>
+
+          <Card
+            sx={{
+              backgroundColor: "#F8CE46",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "24px 16px",
+              gap: "20px",
+            }}
+          >
+            <StepperAddCode />
+          </Card>
+
+          <Card
+            sx={{
+              marginTop: "30px",
+              backgroundColor: "#F8CE46",
+              display: "flex",
+              flexDirection: "column",
+              padding: "24px 16px",
+              overflow: "visible",
+            }}
+          >
+            <ListCodeSave />
+          </Card>
         </>
       )}
       ;
